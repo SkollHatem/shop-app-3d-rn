@@ -1,0 +1,15 @@
+{
+    "extends": "expo/tsconfig.base",
+    "compilerOptions": {
+        "strict": true,
+        "baseUrl": ".",
+        "paths": {
+            "@constants": ["./src/constants.ts"],
+            "@atoms": ["./src/components/atoms/index.ts"],
+            "@molecules": ["./src/components/molecules/index.ts"],
+            "@organisms": ["./src/components/organisms/index.ts"],
+            "@screens": ["./src/screens/index.ts"],
+            "@hooks": ["./src/hooks/index.ts"]
+        }
+    }
+}
