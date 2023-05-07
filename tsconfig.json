@@ -4,6 +4,7 @@
         "strict": true,
         "baseUrl": ".",
         "paths": {
+            "@interfaces": ["./src/interfaces/index.ts"],
             "@constants": ["./src/constants.ts"],
             "@atoms": ["./src/components/atoms/index.ts"],
             "@molecules": ["./src/components/molecules/index.ts"],
