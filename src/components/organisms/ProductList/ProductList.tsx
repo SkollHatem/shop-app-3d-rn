@@ -10,42 +10,20 @@ import { ItemCard } from "@atoms";
 // Constants
 import { SPACING } from "@constants";
 
-const fakeItems = [
-    {
-        img: require("./sillon-amarillo.png"),
-        name: "STRANDMON",
-        label: "Sillón orejero",
-        price: "$279",
-    },
-    {
-        img: require("./sillon-amarillo.png"),
-        name: "STRANDMON",
-        label: "Sillón orejero",
-        price: "$279",
-    },
-    {
-        img: require("./sillon-amarillo.png"),
-        name: "STRANDMON",
-        label: "Sillón orejero",
-        price: "$279",
-    },
-    {
-        img: require("./sillon-amarillo.png"),
-        name: "STRANDMON",
-        label: "Sillón orejero",
-        price: "$279",
-    },
-];
+// Interfaces
+import { Product } from "@interfaces";
 
-interface ProductListProps {}
+interface ProductListProps {
+    products?: Product[];
+}
 
-const ProductList: FC<ProductListProps> = ({}) => {
+const ProductList: FC<ProductListProps> = ({ products = [] }) => {
     const navigation =
         useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
     return (
         <FlatList
-            data={fakeItems}
+            data={products}
             contentContainerStyle={{
                 paddingLeft: SPACING,
             }}
@@ -56,7 +34,9 @@ const ProductList: FC<ProductListProps> = ({}) => {
                 <TouchableOpacity
                     key={index}
                     onPress={() => {
-                        navigation.navigate("Full-DetailsPage");
+                        navigation.navigate("Full-DetailsPage", {
+                            productId: item.id,
+                        });
                     }}
                 >
                     <ItemCard>
@@ -70,7 +50,7 @@ const ProductList: FC<ProductListProps> = ({}) => {
                         </ItemCard.image>
                         <ItemCard.info
                             name={item.name}
-                            label={item.label}
+                            label={item.group}
                             price={item.price}
                         />
                         <ItemCard.actions

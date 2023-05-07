@@ -26,7 +26,7 @@ function ItemCard({ children, customClassName }: ItemCardProps) {
 }
 
 interface ItemCardImageProps {
-    img: any;
+    img: string;
     customClassName?: string;
     children?: React.ReactNode;
 }
@@ -38,12 +38,14 @@ const ItemCardImage: FC<ItemCardImageProps> = ({
     <View
         className={
             customClassName ??
-            "relative h-44 w-full overflow-hidden rounded-lg bg-imgBg p-6"
+            "relative h-44 w-full overflow-hidden rounded-lg bg-white p-6"
         }
     >
         <Image
             className="h-full w-full"
-            source={img}
+            source={{
+                uri: img,
+            }}
             style={{
                 resizeMode: "stretch",
             }}
@@ -61,12 +63,7 @@ const ItemCardImageActions: FC<ItemCardImageActionsProps> = ({
     icon: IconCp,
     onPress,
 }) => (
-    <TouchableOpacity
-        onPress={() => {
-            alert("heart");
-        }}
-        className="absolute left-0 top-0 z-10"
-    >
+    <TouchableOpacity onPress={onPress} className="absolute left-0 top-0 z-10">
         <View className="h-10 w-10 items-center justify-center">
             <IconCp size={18} color={COLORS.secondary} />
         </View>
@@ -76,7 +73,7 @@ const ItemCardImageActions: FC<ItemCardImageActionsProps> = ({
 type ItemCardInfoProps = {
     name: string;
     label: string;
-    price: string;
+    price: number;
 };
 
 const ItemCardInfo: FC<ItemCardInfoProps> = ({ name, label, price }) => (
@@ -86,7 +83,7 @@ const ItemCardInfo: FC<ItemCardInfoProps> = ({ name, label, price }) => (
             <Text className="text-xs text-secondary">{label}</Text>
         </View>
         <View className="my-3 mb-4">
-            <Text className="text-base font-bold text-secondary">{price}</Text>
+            <Text className="text-base font-bold text-secondary">$ {price}</Text>
         </View>
     </View>
 );
