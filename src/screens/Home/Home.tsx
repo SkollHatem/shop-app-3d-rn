@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Header } from "@atoms";
 
 // Molecules
-import { AppBar, BadgeSlider } from "@molecules";
+import { AppBar, BadgeSlider, SkeletonCard } from "@molecules";
 
 // Organisms
 import { ProductList, SoldList } from "@organisms";
@@ -16,9 +16,16 @@ import ProductDetailsScreen from "../ProductDetails";
 // Constants
 import { SPACING } from "@constants";
 
+// Hooks
+import { useProducts } from "@hooks";
+
 const Stack = createNativeStackNavigator();
 
 const HomePage = () => {
+    const { data, loading } = useProducts();
+    const mainProducts = data?.products.filter((p) => p.price >= 100);
+    const topProducts = data?.products.filter((p) => p.price < 100);
+
     return (
         <View className="flex-1 bg-body">
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -27,17 +34,33 @@ const HomePage = () => {
                     <Header>Categorias</Header>
                 </View>
                 <BadgeSlider />
-                <ProductList />
+                {loading ? (
+                    <View className="ml-5 flex-row">
+                        <SkeletonCard />
+                        <SkeletonCard />
+                        <SkeletonCard />
+                    </View>
+                ) : (
+                    <ProductList products={mainProducts} />
+                )}
                 <View style={{ paddingLeft: SPACING }}>
                     <Header>Más vendidos</Header>
                 </View>
-                <SoldList />
+                {loading ? (
+                    <View className="ml-5 flex-row">
+                        <SkeletonCard />
+                        <SkeletonCard />
+                        <SkeletonCard />
+                    </View>
+                ) : (
+                    <SoldList products={topProducts} />
+                )}
             </ScrollView>
         </View>
     );
 };
 
-const Hanlde = () => {
+const HomePageStack = () => {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -53,4 +76,4 @@ const Hanlde = () => {
     );
 };
 
-export default Hanlde;
+export default HomePageStack;

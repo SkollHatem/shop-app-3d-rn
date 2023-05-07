@@ -9,16 +9,6 @@ module.exports = {
                 body: "#f8f8f8",
                 imgBg: "#f4f4f4",
                 placeholder: "#ededed",
-                light: {
-                    header: "#eaeefa",
-                    body: "#fdfbff",
-                    text: "#1B1B1F",
-                },
-                dark: {
-                    header: "#272931",
-                    body: "#1b1b1f",
-                    text: "#E3E2E6",
-                },
             },
         },
     },

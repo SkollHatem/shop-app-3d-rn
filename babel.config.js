@@ -9,6 +9,7 @@ module.exports = function (api) {
                 "module-resolver",
                 {
                     alias: {
+                        "@interfaces": "./src/interfaces",
                         "@constants": "./src/constants.ts",
                         "@atoms": "./src/components/atoms",
                         "@molecules": "./src/components/molecules",
